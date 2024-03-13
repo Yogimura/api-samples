@@ -26,6 +26,7 @@ import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -167,7 +168,7 @@ public class GeolocationSearch {
 
         System.out.print("Please enter a search term: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        inputQuery = bReader.readLine();
+        inputQuery = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (inputQuery.length() < 1) {
             // Use the string "YouTube Developers Live" as a default.
@@ -185,7 +186,7 @@ public class GeolocationSearch {
 
         System.out.print("Please enter location coordinates (example: 37.42307,-122.08427): ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        inputQuery = bReader.readLine();
+        inputQuery = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (inputQuery.length() < 1) {
             // Use the string "37.42307,-122.08427" as a default.
@@ -203,7 +204,7 @@ public class GeolocationSearch {
 
         System.out.print("Please enter a location radius (examples: 5km, 8mi):");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        inputQuery = bReader.readLine();
+        inputQuery = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (inputQuery.length() < 1) {
             // Use the string "5km" as a default.

@@ -23,6 +23,7 @@ import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 import com.google.api.services.youtube.model.VideoLocalization;
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -241,7 +242,7 @@ public class VideoLocalizations {
 
         System.out.print("Please enter a " + resource + " id: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        id = bReader.readLine();
+        id = BoundedLineReader.readLine(bReader, 5_000_000);
 
         System.out.println("You chose " + id + " for localizations.");
         return id;
@@ -256,7 +257,7 @@ public class VideoLocalizations {
 
         System.out.print("Please enter a localized " + type + ": ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        metadata = bReader.readLine();
+        metadata = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (metadata.length() < 1) {
             // If nothing is entered, defaults to type.
@@ -277,7 +278,7 @@ public class VideoLocalizations {
 
         System.out.print("Please enter the language for the resource's default metadata: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        defaultlanguage = bReader.readLine();
+        defaultlanguage = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (defaultlanguage.length() < 1) {
             // If nothing is entered, defaults to "en".
@@ -298,7 +299,7 @@ public class VideoLocalizations {
 
         System.out.print("Please enter the localized metadata language: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        language = bReader.readLine();
+        language = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (language.length() < 1) {
             // If nothing is entered, defaults to "de".
@@ -319,7 +320,7 @@ public class VideoLocalizations {
         System.out.print("Please choose action to be accomplished: ");
         System.out.print("Options are: 'set', 'get' and 'list' ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        action = bReader.readLine();
+        action = BoundedLineReader.readLine(bReader, 5_000_000);
 
         return action;
     }

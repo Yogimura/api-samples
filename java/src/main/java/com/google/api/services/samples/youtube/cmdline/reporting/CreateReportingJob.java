@@ -22,6 +22,7 @@ import com.google.api.services.youtubereporting.model.Job;
 import com.google.api.services.youtubereporting.model.ListReportTypesResponse;
 import com.google.api.services.youtubereporting.model.ReportType;
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -148,7 +149,7 @@ public class CreateReportingJob {
 
         System.out.print("Please enter the name for the job [javaTestJob]: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        name = bReader.readLine();
+        name = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (name.length() < 1) {
             // If nothing is entered, defaults to "javaTestJob".
@@ -168,7 +169,7 @@ public class CreateReportingJob {
 
         System.out.print("Please enter the reportTypeId for the job: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        id = bReader.readLine();
+        id = BoundedLineReader.readLine(bReader, 5_000_000);
 
         System.out.println("You chose " + id + " as the report type Id for the job.");
         return id;

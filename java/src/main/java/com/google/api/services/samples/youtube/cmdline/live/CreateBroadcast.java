@@ -21,6 +21,7 @@ import com.google.api.services.samples.youtube.cmdline.Auth;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -164,7 +165,7 @@ public class CreateBroadcast {
 
         System.out.print("Please enter a broadcast title: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        title = bReader.readLine();
+        title = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (title.length() < 1) {
             // Use "New Broadcast" as the default title.
@@ -182,7 +183,7 @@ public class CreateBroadcast {
 
         System.out.print("Please enter a stream title: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        title = bReader.readLine();
+        title = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (title.length() < 1) {
             // Use "New Stream" as the default title.

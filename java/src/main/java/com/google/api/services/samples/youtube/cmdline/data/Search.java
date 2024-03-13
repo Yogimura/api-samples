@@ -27,6 +27,7 @@ import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Thumbnail;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -133,7 +134,7 @@ public class Search {
 
         System.out.print("Please enter a search term: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        inputQuery = bReader.readLine();
+        inputQuery = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (inputQuery.length() < 1) {
             // Use the string "YouTube Developers Live" as a default.
