@@ -22,6 +22,7 @@ import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.Subscription;
 import com.google.api.services.youtube.model.SubscriptionSnippet;
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -112,7 +113,7 @@ public class AddSubscription {
 
         System.out.print("Please enter a channel id: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        channelId = bReader.readLine();
+        channelId = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (channelId.length() < 1) {
             // If nothing is entered, defaults to "YouTube For Developers."

@@ -30,6 +30,7 @@ import com.google.api.services.youtube.model.Caption;
 import com.google.api.services.youtube.model.CaptionListResponse;
 import com.google.api.services.youtube.model.CaptionSnippet;
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -452,7 +453,7 @@ public class Captions {
 
         System.out.print("Please enter a caption track id: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        captionId = bReader.readLine();
+        captionId = BoundedLineReader.readLine(bReader, 5_000_000);
 
         System.out.println("You chose " + captionId + ".");
         return captionId;
@@ -467,7 +468,7 @@ public class Captions {
 
         System.out.print("Please enter a video id: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        videoId = bReader.readLine();
+        videoId = BoundedLineReader.readLine(bReader, 5_000_000);
 
         System.out.println("You chose " + videoId + " for captions.");
         return videoId;
@@ -482,7 +483,7 @@ public class Captions {
 
         System.out.print("Please enter a caption track name: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        name = bReader.readLine();
+        name = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (name.length() < 1) {
             // If nothing is entered, defaults to "YouTube For Developers".
@@ -502,7 +503,7 @@ public class Captions {
 
         System.out.print("Please enter the caption language: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        language = bReader.readLine();
+        language = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (language.length() < 1) {
             // If nothing is entered, defaults to "en".
@@ -522,7 +523,7 @@ public class Captions {
 
         System.out.print("Please enter the path of the caption track file to upload: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        path = bReader.readLine();
+        path = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (path.length() < 1) {
             // Exit if the user does not provide a path to the file.
@@ -546,7 +547,7 @@ public class Captions {
         System.out.print("Please enter the path of the new caption track file to upload"
             + " (Leave empty if you don't want to upload a new file.):");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        path = bReader.readLine();
+        path = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (path.length() < 1) {
             return null;
@@ -569,7 +570,7 @@ public class Captions {
         System.out.print("Options are: 'upload', 'list', 'update', 'download', 'delete',"
             + " and 'all' ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        action = bReader.readLine();
+        action = BoundedLineReader.readLine(bReader, 5_000_000);
 
         return action;
     }

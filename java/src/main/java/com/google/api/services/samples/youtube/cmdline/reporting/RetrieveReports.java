@@ -26,6 +26,7 @@ import com.google.api.services.youtubereporting.model.ListReportsResponse;
 import com.google.api.services.youtubereporting.model.Report;
 
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -175,7 +176,7 @@ public class RetrieveReports {
 
         System.out.print("Please enter the job id for the report retrieval: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        id = bReader.readLine();
+        id = BoundedLineReader.readLine(bReader, 5_000_000);
 
         System.out.println("You chose " + id + " as the job Id for the report retrieval.");
         return id;
@@ -190,7 +191,7 @@ public class RetrieveReports {
 
         System.out.print("Please enter the report URL to download: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        url = bReader.readLine();
+        url = BoundedLineReader.readLine(bReader, 5_000_000);
 
         System.out.println("You chose " + url + " as the URL to download.");
         return url;

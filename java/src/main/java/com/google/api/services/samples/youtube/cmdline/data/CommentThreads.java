@@ -14,6 +14,7 @@
 
 package com.google.api.services.samples.youtube.cmdline.data;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -230,7 +231,7 @@ public class CommentThreads {
 
         System.out.print("Please enter a channel id: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        channelId = bReader.readLine();
+        channelId = BoundedLineReader.readLine(bReader, 5_000_000);
 
         return channelId;
     }
@@ -244,7 +245,7 @@ public class CommentThreads {
 
         System.out.print("Please enter a video id: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        videoId = bReader.readLine();
+        videoId = BoundedLineReader.readLine(bReader, 5_000_000);
 
         return videoId;
     }
@@ -258,7 +259,7 @@ public class CommentThreads {
 
         System.out.print("Please enter a comment text: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        text = bReader.readLine();
+        text = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (text.length() < 1) {
             // If nothing is entered, defaults to "YouTube For Developers."

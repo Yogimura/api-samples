@@ -24,6 +24,7 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.YouTube.Thumbnails.Set;
 import com.google.api.services.youtube.model.ThumbnailSetResponse;
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.*;
 import java.util.List;
@@ -163,7 +164,7 @@ public class UploadThumbnail {
 
         System.out.print("Please enter a video Id to update: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        inputVideoId = bReader.readLine();
+        inputVideoId = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (inputVideoId.length() < 1) {
             // Exit if the user does not specify a video ID.
@@ -183,7 +184,7 @@ public class UploadThumbnail {
 
         System.out.print("Please enter the path of the image file to upload: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        path = bReader.readLine();
+        path = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (path.length() < 1) {
             // Exit if the user does not provide a path to the image file.

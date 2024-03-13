@@ -22,6 +22,7 @@ import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 import com.google.api.services.youtube.model.VideoSnippet;
 import com.google.common.collect.Lists;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -130,7 +131,7 @@ public class UpdateVideo {
 
         System.out.print("Please enter a tag for your video: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        keyword = bReader.readLine();
+        keyword = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (keyword.length() < 1) {
             // If the user doesn't enter a tag, use the default value "New Tag."
@@ -148,7 +149,7 @@ public class UpdateVideo {
 
         System.out.print("Please enter a video Id to update: ");
         BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-        videoId = bReader.readLine();
+        videoId = BoundedLineReader.readLine(bReader, 5_000_000);
 
         if (videoId.length() < 1) {
             // Exit if the user doesn't provide a value.
